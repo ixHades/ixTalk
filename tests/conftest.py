@@ -31,5 +31,11 @@ async def test_user():
     import random
     user = await Users.create(user_id=random.randint(10000000,99999999))
     return user
-
+@pytest.fixture()
+async def test_admin():
+    from app.db.models.admins import Admins
+    from app.db.enums import AdminRole
+    import random
+    admin = await Admins.create(admin_user_id=random.randint(10000000,99999999), role=AdminRole.SUPER)
+    return admin
 
