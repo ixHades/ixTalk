@@ -4,12 +4,8 @@ from tortoise.exceptions import DoesNotExist
 from tortoise.models import Model
 from tortoise import fields
 from app.db.enums import MessageStatus
-<<<<<<< HEAD
 from app.utils.code_generator import CodeGenerator
-=======
 from app.db.models import Admins
->>>>>>> feature/add-model-methods
-
 
 class Messages(Model):
     message_id = fields.IntField(primary_key=True)
@@ -19,14 +15,6 @@ class Messages(Model):
         "models.Messages", to_field="message_code", null=True
     )
     channel_message_id = fields.IntField(null=False)
-<<<<<<< HEAD
-    unique_code = fields.ForeignKeyField("models.Users", to_field="unique_code")
-    status = fields.CharEnumField(MessageStatus)
-    reviewed_by = fields.ForeignKeyField("models.Admins", to_field="admin_user_id")
-    reviewed_note = fields.TextField()
-    created_at = fields.DatetimeField(auto_now_add=True)
-    updated_at = fields.DatetimeField(auto_now=True)
-=======
     user = fields.ForeignKeyField('models.Users', to_field='unique_code')
     status = fields.CharEnumField(MessageStatus)
     reviewed_by = fields.ForeignKeyField('models.Admins', to_field='admin_user_id')
@@ -51,4 +39,3 @@ class Messages(Model):
             return await cls.get(message_code=message_code)
         except DoesNotExist:
             return None
->>>>>>> feature/add-model-methods
