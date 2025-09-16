@@ -26,17 +26,17 @@ class Users(Model):
         self, reason: str, severity: WarningSeverity, issued_by: Admins
     ) -> WarningEntry:
         warning = await WarningEntry.create(
-                user=self,
-                reason=reason,
-                severity=severity,
-                issued_by=issued_by,
-            )
+            user=self,
+            reason=reason,
+            severity=severity,
+            issued_by=issued_by,
+        )
         self.warning_count += 1
         if severity == WarningSeverity.HIGH:
             self.is_blocked = True
         await self.save(
-                update_fields=["warning_count", "is_blocked", "updated_at"],
-            )
+            update_fields=["warning_count", "is_blocked", "updated_at"],
+        )
         return warning
 
     async def is_blocked_or_high_warning(self) -> bool:

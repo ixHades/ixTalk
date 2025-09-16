@@ -5,7 +5,9 @@ from app.db.enums import WarningSeverity
 
 class WarningEntry(Model):
     warning_id = fields.IntField(primary_key=True)
-    user = fields.ForeignKeyField(model_name="models.Users", to_field="user_id", related_name="warning_entries")
+    user = fields.ForeignKeyField(
+        model_name="models.Users", to_field="user_id", related_name="warning_entries"
+    )
     reason = fields.TextField()
     issued_by = fields.ForeignKeyField(
         model_name="models.Admins", to_field="admin_user_id"
